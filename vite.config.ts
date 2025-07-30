@@ -7,7 +7,7 @@ import { componentTagger } from "lovable-tagger";
 const repoName = "certistore";
 
 export default defineConfig(({ mode }) => ({
-  base: "/certistore/",
+  base: "/",
   server: {
     host: "::",
     port: 8080,
