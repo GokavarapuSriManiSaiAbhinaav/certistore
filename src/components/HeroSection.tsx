@@ -37,13 +37,13 @@ const HeroSection = ({ onViewCertificates }: { onViewCertificates: () => void })
       <div className="glass-card p-12 max-w-4xl mx-auto text-center relative z-10 glow-primary">
         <div data-aos="fade-up" data-aos-delay="100">
           <h1 className="text-6xl md:text-8xl font-bold font-poppins mb-6 text-gradient">
-            Alex Chen
+            ABHINAV
           </h1>
         </div>
         
         <div data-aos="fade-up" data-aos-delay="200">
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 font-light">
-            Digital Creator & Certified Professional
+            From Learning to Earning – Certify It
           </p>
         </div>
         
