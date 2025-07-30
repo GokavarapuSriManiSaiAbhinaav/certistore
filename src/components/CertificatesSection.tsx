@@ -1,5 +1,18 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
 import CertificateCard from './CertificateCard';
+import AddCertificateModal from './AddCertificateModal';
+
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+  imageUrl?: string;
+  downloadUrl?: string;
+}
 
 const mockCertificates = [
   {
@@ -53,6 +66,17 @@ const mockCertificates = [
 ];
 
 const CertificatesSection = forwardRef<HTMLElement>((props, ref) => {
+  const [certificates, setCertificates] = useState<Certificate[]>(mockCertificates);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const handleAddCertificate = (newCertificate: Omit<Certificate, 'id'>) => {
+    const certificate: Certificate = {
+      ...newCertificate,
+      id: Date.now().toString(),
+    };
+    setCertificates(prev => [certificate, ...prev]);
+    setIsAddModalOpen(false);
+  };
   return (
     <section ref={ref} className="py-20 px-4 relative">
       {/* Background Elements */}
@@ -67,15 +91,25 @@ const CertificatesSection = forwardRef<HTMLElement>((props, ref) => {
           <h2 className="text-4xl md:text-6xl font-bold font-poppins mb-6 text-gradient">
             My Certificates
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
             A curated collection of my professional achievements and continuous learning journey. 
             Each certification represents dedication to excellence and expertise in cutting-edge technologies.
           </p>
+          
+          {/* Add Certificate Button */}
+          <Button 
+            onClick={() => setIsAddModalOpen(true)}
+            className="glass hover:glow-primary transition-all duration-300 hover:scale-105"
+            size="lg"
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            Add Certificate
+          </Button>
         </div>
 
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mockCertificates.map((certificate, index) => (
+          {certificates.map((certificate, index) => (
             <CertificateCard 
               key={certificate.id} 
               certificate={certificate} 
@@ -102,6 +136,13 @@ const CertificatesSection = forwardRef<HTMLElement>((props, ref) => {
           </div>
         </div>
       </div>
+
+      {/* Add Certificate Modal */}
+      <AddCertificateModal 
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAdd={handleAddCertificate}
+      />
     </section>
   );
 });

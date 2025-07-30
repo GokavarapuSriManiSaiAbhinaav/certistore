@@ -1,16 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Download, Eye, Award } from 'lucide-react';
-
-interface Certificate {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-  description: string;
-  imageUrl?: string;
-  downloadUrl?: string;
-}
+import { Certificate } from './CertificatesSection';
 
 interface CertificateCardProps {
   certificate: Certificate;
