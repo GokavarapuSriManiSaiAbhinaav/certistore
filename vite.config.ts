@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === "development" && componentTagger(),
   ].filter(Boolean),
+  base:'/certistore/'
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
